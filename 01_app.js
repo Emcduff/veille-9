@@ -51,12 +51,32 @@ fs.appendFile(__dirname + "/public/data/membres.txt", ',' + JSON.stringify(repon
 
 })
 ////////////////////////////////////////////////////////// Route : membres
-app.get('/membres', (req,res)=>{
+/*app.get('/membres', (req,res)=>{
 	fs.readFile( __dirname + "/public/data/" + "adresses.txt", 'utf8', function (err, data) {
 		if (err) throw err;
  		let objet = JSON.parse('[' + data + ']');
  		res.end(contenu_objet_json(objet));
 	});
+})*/
+
+app.get('/membres', (req, res) => {
+ console.log('la route route get / = ' + req.url)
+ 
+ var cursor = db.collection('adresse')
+                .find().toArray(function(err, resultat){
+ if (err) return console.log(err)
+ // transfert du contenu vers la vue index.ejs (renders)
+ // affiche le contenu de la BD
+ res.render('gabarit.ejs', {adresse: resultat})
+ }) 
+})
+
+app.post('/ajouter', (req, res) => {
+ db.collection('adresse').save(req.body, (err, result) => {
+ if (err) return console.log(err)
+ console.log('sauvegarder dans la BD')
+ res.redirect('/')
+ })
 })
 
 const contenu_objet_json = (o) =>{
