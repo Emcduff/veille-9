@@ -22,15 +22,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
 
 ///////////////////////////////////////////////////////////// Route /html/01_form.html
 app.get('/formulaire', function (req, res) {
- console.log('la route route get / = ' + req.url)
- 
- var cursor = db.collection('adresse')
-                .find().toArray(function(err, resultat){
- if (err) return console.log(err)
- // transfert du contenu vers la vue index.ejs (renders)
- // affiche le contenu de la BD
- res.render('gabarit.ejs', {adresse: resultat})
- }) 
+ res.render('formulaire.ejs');
 })
 //////////////////////////////////////////////////////////// Route /
 app.get('/', (req, res) => {
@@ -67,7 +59,7 @@ app.get('/membres', (req, res) => {
  if (err) return console.log(err)
  // transfert du contenu vers la vue index.ejs (renders)
  // affiche le contenu de la BD
- res.render('gabarit.ejs', {adresse: resultat})
+ res.render('membres.ejs', {adresse: resultat})
  }) 
 })
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8">
+ <title>Liste des membres</title>
+</head>
+<body>
+ <table class="tableau">
+ <% adresse.forEach(elm => {%>
+ <tr>
+ <td><%= elm.id %></td>
+ <td><%= elm.nom %></td>
+ <td><%= elm.telephone %></td>
+ </tr>
+ <% }) %>
+ </table>
+</body>
+</html>

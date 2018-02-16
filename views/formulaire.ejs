@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
  <meta charset="UTF-8">
- <title>Mon Application</title>
+ <title>Formulaire d'application</title>
 </head>
 <body>
  Node.js, Express et MongoDB.
@@ -12,15 +12,5 @@
  <input type="text" placeholder="Telephone" name="telephone">
  <button type="submit">Submit</button>
  </form>
-
- <table class="tableau">
- <% adresse.forEach(elm => {%>
- <tr>
- <td><%= elm.id %></td>
- <td><%= elm.nom %></td>
- <td><%= elm.telephone %></td>
- </tr>
- <% }) %>
- </table>
 </body>
 </html>
