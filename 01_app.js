@@ -51,13 +51,6 @@ fs.appendFile(__dirname + "/public/data/membres.txt", ',' + JSON.stringify(repon
 
 })
 ////////////////////////////////////////////////////////// Route : membres
-/*app.get('/membres', (req,res)=>{
-	fs.readFile( __dirname + "/public/data/" + "adresses.txt", 'utf8', function (err, data) {
-		if (err) throw err;
- 		let objet = JSON.parse('[' + data + ']');
- 		res.end(contenu_objet_json(objet));
-	});
-})*/
 
 app.get('/membres', (req, res) => {
  console.log('la route route get / = ' + req.url)
