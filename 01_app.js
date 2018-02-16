@@ -22,8 +22,15 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
 
 ///////////////////////////////////////////////////////////// Route /html/01_form.html
 app.get('/formulaire', function (req, res) {
- console.log(__dirname);
- res.sendFile( __dirname + "/public/html/" + "01_form.html" );
+ console.log('la route route get / = ' + req.url)
+ 
+ var cursor = db.collection('adresse')
+                .find().toArray(function(err, resultat){
+ if (err) return console.log(err)
+ // transfert du contenu vers la vue index.ejs (renders)
+ // affiche le contenu de la BD
+ res.render('gabarit.ejs', {adresse: resultat})
+ }) 
 })
 //////////////////////////////////////////////////////////// Route /
 app.get('/', (req, res) => {
