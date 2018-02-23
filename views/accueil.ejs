@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
- <meta charset="UTF-8">
- <title>Formulaire d'application</title>
-</head>
+<%- include('composants/head') %>
 <body>
- Node.js, Express et MongoDB.
- <button id='update'>Mise à jour téléphone</button>
- <form action="/ajouter" method="POST">
- <input type="text" placeholder="prenom" name="prenom"><br>
- <input type="text" placeholder="nom" name="nom"><br>
- <input type="text" placeholder="Telephone" name="telephone"><br>
- <input type="text" placeholder="Courriel" name="courriel"><br>
- <button type="submit">Submit</button>
- </form>
+ <%- include('composants/entete') %>
+ <h1>Accueil</h1>
+ <p>Bienvenue a l'atelier Node.js</p>
+ <%- include('composants/footer') %>
 </body>
 </html>
