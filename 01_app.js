@@ -1,9 +1,16 @@
+"use strict";
+
+const peupler = require("./mes_modules/peupler");
 const express = require('express');
 const fs = require("fs");
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const tableau = require('./mes_modules/peupler/tableaux');
+
+let longTabNom = tableau.tabNom.length;
+let longTabPrenom = tableau.tabPrenom.length;
 
 var util = require("util");
 var app = express();
