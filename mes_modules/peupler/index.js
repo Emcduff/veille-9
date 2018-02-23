@@ -7,7 +7,6 @@ const maxPrenom = tableau.tabPrenom.length
 const maxTele = tableau.tabTele.length
 const maxCourriel = tableau.tabCourriel.length
 const peupler = () => {
-	console.log('ok')
 	let position = Math.floor(Math.random()*maxNom)
 	let nom = tableau.tabNom[position]
 	position = Math.floor(Math.random()*maxPrenom)
