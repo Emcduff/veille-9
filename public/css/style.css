@@ -48,25 +48,20 @@ tbody{
 } 
    
    
-  input{ 
+input{ 
     margin-bottom: 1em;
-  }
-
-
+}
 
 
 ul li a{
-
     text-decoration: none;
     color: rgb(31, 31, 31);
 
 }
+
 ul li a:hover{
         color: rgb(114, 225, 253);
-
- }
-
-  
+}
 
 .Accueil, .Adresses, .Ajouter, .Detruire, .Trier, .Sauver {
     border-style: outset;
@@ -75,8 +70,10 @@ ul li a:hover{
     color: white;
 }
 
-.Accueil:hover, .Adresses:hover, .Ajouter:hover, .Detruire:hover, .Trier:hover .Sauver:hover {
-    
-     background-color: rgb(195, 200, 255) ;
-    
+.Accueil:hover, .Adresses:hover, .Ajouter:hover, .Detruire:hover, .Trier:hover .Sauver:hover { 
+    background-color: rgb(195, 200, 255) ;
+}
+
+.formModifier {
+    display:none;
 }
