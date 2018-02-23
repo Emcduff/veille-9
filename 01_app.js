@@ -31,24 +31,27 @@ app.get('/adresse', (req, res) => {
 	});
 })
 
-/*app.post('/ajouter', (req, res) => {
-	db.collection('adresse').save(req.body, (err, result) => {
+app.post('/ajouter', (req, res) => {
+	db.collection('adresse').save(req.body, (err, resultat) => {
 	if (err) return console.log(err);
 	console.log('sauvegarder dans la BD');
 	res.redirect('/');
 	});
-})*/
+})
 
 app.post('/modifier', (req, res) => {
 	req.body._id = ObjectID(req.body._id);
-	db.collection('adresse').save(req.body, (err, result) => { if (err) return console.log(err) console.log('sauvegarder dans la BD') res.redirect('/list') })
-}
+	db.collection('adresse').save(req.body, (err, resultat) => { 
+		if (err) return console.log(err);
+		res.redirect('/adresse');
+	});
+})
 
 app.get('/delete/:id', (req, res) => {
 	var id = req.params.id;
 	db.collection('adresse').findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
 		if (err) return console.log(err);
 		res.redirect('/adresse');
-	})
+	});
 })
 
