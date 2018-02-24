@@ -2,7 +2,6 @@
 
 const peupler = require("./mes_modules/peupler");
 const express = require('express');
-const fs = require("fs");
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const MongoClient = require('mongodb').MongoClient;
