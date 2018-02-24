@@ -78,23 +78,25 @@ app.get('/trier/:cle/:ordre', (req, res) => {
 	});
 });
 
-//Fonction peupler
+//Route qui appelle la Fonction peupler
 app.get('/peupler', (req, res) => {
 	peupler_bd();
 	res.redirect('/adresse');
 });
 
-const peupler_bd = (req,res,next) => {
-	res.resultat = peupler();
-	console.log('début boucle');
-	for (let elm of res.resultat)
+const peupler_bd = (req,res) => {
+	for (var x=0; x<10; x++)
 	{
-		db.collection('adresse').save(elm, (err, result) => {
+		let resultat = peupler();
+		db.collection('adresse').save(resultat, (err, result) => {
 			if (err) return console.log(err);
 		})
  	}
- 	console.log('fin boucle'); 
- 	next();
 }
 
+//Route
+app.get('/vider', (req, res) => {
+	db.collection('adresse').drop();
+	res.redirect('/adresse');
+});
 

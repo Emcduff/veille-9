@@ -24,5 +24,4 @@ const peupler = () => {
 			}
 }
 
-
-module.exports = peupler
+module.exports = peupler;
