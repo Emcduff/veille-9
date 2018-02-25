@@ -78,7 +78,7 @@ app.get('/trier/:cle/:ordre', (req, res) => {
 	});
 });
 
-//Route qui appelle la Fonction peupler
+//Route qui appelle la Fonction peupler_bd
 app.get('/peupler', (req, res) => {
 	peupler_bd();
 	res.redirect('/adresse');
@@ -88,15 +88,27 @@ const peupler_bd = (req,res) => {
 	for (var x=0; x<10; x++)
 	{
 		let resultat = peupler();
-		db.collection('adresse').save(resultat, (err, result) => {
+		db.collection('adresse').save(resultat, (err, resultat) => {
 			if (err) return console.log(err);
 		})
  	}
 }
 
-//Route
+//Route pour vider la BDD
 app.get('/vider', (req, res) => {
 	db.collection('adresse').drop();
 	res.redirect('/adresse');
 });
 
+//Recherche dans la BDD
+app.post('/rechercher', (req, res) => {
+			db.collection('adresse').find({
+			$or:[{"prenom": { '$regex': req.body.rechercher, '$options': 'i'}},
+			{"nom": { '$regex': req.body.rechercher, '$options': 'i'}},
+			{"courriel": { '$regex': req.body.rechercher, '$options': 'i'}},
+			{"telephone": { '$regex': req.body.rechercher, '$options': 'i'}}]
+	}).toArray(function(err, resultat) {
+		if(err) throw err;
+		res.render('adresse.ejs', {adresse: resultat});
+	})
+});
