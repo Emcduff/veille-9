@@ -1,18 +1,15 @@
 body {
   font-family: 'Quicksand', sans-serif;
-  display:flex;
   width: 100vw;
   height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
 }
 
 header.entete {
   width: 100vw;
   height:100vh;
   position:relative;
-  top: 0px;
+  top: 0vh;
 }
 
 header.entete nav {
@@ -20,15 +17,15 @@ header.entete nav {
   flex-direction: row;
   justify-content: center;
   background-color: #424242;
-  margin-bottom:3vh;
+  height:6vw;
 }
 
 header.entete nav a {
   text-decoration: none;
   margin-right:3vw;
   margin-left:3vw;
-  margin-top:2.5vh;
-  margin-bottom:2.5vh;
+  margin-top:1.5vw;
+  margin-bottom:1.5vw;
   font-size:2.5vw;
   color:white;
 }
@@ -41,26 +38,50 @@ header.entete section {
 
 header.entete section i {
   color: #424242;
-  font-size: 17vw;
+  font-size:450px;
   padding-top:2vh;
   padding-bottom:4vh;
 }
 
+header.entete section h1 {
+  color: #424242;
+  font-size: 2.2vw;
+  margin:0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 footer.footer ul li a {
   text-decoration: none;
+  color:white;
+  margin-top:0.6vw;
+  margin-bottom:0.6vw;
 }
 
 footer.footer ul {
   list-style: none;
   margin-right:3vw;
   margin-left:3vw;
+  color:white;
+  font-size:1.2vw;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 footer.footer {
-  width:100vw;
-  display:flex;
-  flex-direction: row;
+  width:100%;
+  display: flex;
   justify-content: center;
   position:relative;
-  bottom:0px;
+  bottom:0;
+  padding-bottom:3vh;
+  padding-top:2vh;
+  background:#424242;
 }
