@@ -1,13 +1,17 @@
 body {
   font-family: 'Quicksand', sans-serif;
   display:flex;
+  width: 100vw;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-header.entete section {
-  text-align: center;
+header.entete {
+  width: 100vw;
+  position:absolute;
+  top: 0px;
 }
 
 header.entete nav {
@@ -26,6 +30,19 @@ header.entete nav a {
   margin-bottom:2.5vh;
   font-size:2.5vw;
   color:white;
+}
+
+header.entete section {
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+header.entete section i {
+  color: #424242;
+  font-size: 17vw;
+  padding-top:2vh;
+  padding-bottom:4vh;
 }
 
 footer.footer ul li a {
