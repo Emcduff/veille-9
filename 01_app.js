@@ -14,6 +14,7 @@ let longTabPrenom = tableau.tabPrenom.length;
 var util = require("util");
 var app = express();
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.set("view engine", "ejs");
@@ -46,15 +47,6 @@ app.post('/ajouter', (req, res) => {
 	if (err) return console.log(err);
 	console.log('sauvegarder dans la BD');
 	res.redirect('/adresse');
-	});
-});
-
-//Modifier l'information d'un membre sur la BDD
-app.post('/modifier', (req, res) => {
-	req.body._id = ObjectID(req.body._id);
-	db.collection('adresse').save(req.body, (err, resultat) => { 
-		if (err) return console.log(err);
-		res.redirect('/adresse');
 	});
 });
 
@@ -112,3 +104,15 @@ app.post('/rechercher', (req, res) => {
 		res.render('adresse.ejs', {adresse: resultat});
 	})
 });
+
+//Route test ajax
+app.post('/modifier_ajax', (req,res) => {
+   req.body._id = ObjectID(req.body._id)
+
+   db.collection('adresse').save(req.body, (err, result) => {
+   if (err) return console.log(err)
+       console.log('sauvegarder dans la BD')
+   res.send(JSON.stringify(req.body));
+   // res.status(204)
+   })
+})

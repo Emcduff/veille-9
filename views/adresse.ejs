@@ -4,42 +4,60 @@
  <main class="content">
  <%- include('composants/form_post') %>
  <%- include('composants/adr') %>
+ <button id='testAJAX'>test AJAX</button>
  </main>
  <%- include('composants/footer') %>
 </body>
 
 
 <script type="text/javascript">
- let elmSauver = document.querySelectorAll('.sauver')
- console.log('elmSauver = ' + elmSauver.length)
- for (elm of elmSauver)
- {
- elm.addEventListener('click', function(){
- /* 
- console.log(this
- .parentNode
- .parentNode
- .children[1].innerHTML)
- */
- let laLigne = this.parentNode.parentNode
- let id = laLigne.children[0].innerHTML
- let nom = laLigne.children[1].innerHTML
- let prenom = laLigne.children[2].innerHTML
- let telephone = laLigne.children[3].innerHTML
- let courriel = laLigne.children[4].innerHTML
 
-let elmForm = document.getElementById('mon_formulaire')
- console.log(elmForm.tagName)
- let elmInput = elmForm.querySelectorAll('input')
- elmInput[0].value = id
- elmInput[1].value = nom
- elmInput[2].value = prenom
- elmInput[3].value = telephone
- elmInput[4].value = courriel
+	let elmBouton = document.getElementById('testAJAX');
+	let elmSauver = document.querySelectorAll('.sauver')
 
-elmForm.submit()
+	for (elm of elmSauver)
+	{
+		elm.addEventListener('click', function()
+		{
+			let laLigne = this.parentNode.parentNode
 
- })
- } 
+			console.log('ok');
+
+			xhr = new XMLHttpRequest();
+			xhr.open('POST', "modifier_ajax", true);
+
+			data = {
+				"_id" : laLigne.children[0].innerHTML, 
+ 				"nom" : laLigne.children[1].innerHTML,
+ 				"prenom" : laLigne.children[2].innerHTML,
+ 				"telephone" : laLigne.children[3].innerHTML,
+ 				"courriel" : laLigne.children[4].innerHTML
+			};
+
+			sData = JSON.stringify(data);
+			xhr.setRequestHeader('Content-type', 'application/json');
+			xhr.send(sData);
+			xhr.addEventListener("readystatechange", traiterRequest, false);
+
+			let elmForm = document.getElementById('mon_formulaire');
+ 			let elmInput = elmForm.querySelectorAll('input');
+
+ 			elmInput[0].value = sData["id"];
+ 			elmInput[1].value = sData["nom"];
+ 			elmInput[2].value = sData["prenom"];
+ 			elmInput[3].value = sData["telephone"];
+ 			elmInput[4].value = sData["courriel"];
+		});
+
+		function traiterRequest(e)
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				console.log('ajax fonctionne');
+				let  maReponse = JSON.parse(xhr.responseText);
+			};
+		};
+	};
+
 </script>
 </html>
