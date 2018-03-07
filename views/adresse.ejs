@@ -4,7 +4,6 @@
  <main class="content">
  <%- include('composants/form_post') %>
  <%- include('composants/adr') %>
- <button id='testAJAX'>test AJAX</button>
  </main>
  <%- include('composants/footer') %>
 </body>
@@ -12,7 +11,6 @@
 
 <script type="text/javascript">
 
-	let elmBouton = document.getElementById('testAJAX');
 	let elmSauver = document.querySelectorAll('.sauver')
 
 	for (elm of elmSauver)
@@ -21,12 +19,13 @@
 		{
 			let laLigne = this.parentNode.parentNode
 
-			console.log('ok');
+			console.log('modifier_ajax');
 
 			xhr = new XMLHttpRequest();
 			xhr.open('POST', "modifier_ajax", true);
 
-			data = {
+			data =
+			{
 				"_id" : laLigne.children[0].innerHTML, 
  				"nom" : laLigne.children[1].innerHTML,
  				"prenom" : laLigne.children[2].innerHTML,
@@ -58,6 +57,31 @@
 			};
 		};
 	};
+
+	let elmAjouter = document.querySelectorAll('.ajouter');
+	document.getElementById("btnAjouter").addEventListener('click', function()
+	{
+		console.log('Ajouter_ajax');
+		xhr = new XMLHttpRequest();
+		xhr.open('POST', "modifier_ajax", true);
+
+		data =
+		{
+ 			"nom" : elmAjouter[0].value,
+ 			"prenom" : elmAjouter[1].value,
+ 			"telephone" : elmAjouter[2].value,
+ 			"courriel" : elmAjouter[3].value
+ 		};
+
+ 		sData = JSON.stringify(data);
+
+ 		console.log(sData);
+
+		xhr.setRequestHeader('Content-type', 'application/json');
+		xhr.send(sData);
+		xhr.addEventListener("readystatechange", traiterRequest, false);
+
+	});
 
 </script>
 </html>

@@ -41,15 +41,6 @@ app.get('/adresse', (req, res) => {
 	});
 });
 
-//Ajouter un membre à la BDD
-app.post('/ajouter', (req, res) => {
-	db.collection('adresse').save(req.body, (err, resultat) => {
-	if (err) return console.log(err);
-	console.log('sauvegarder dans la BD');
-	res.redirect('/adresse');
-	});
-});
-
 //Supprimer un membre de la BDD
 app.get('/delete/:id', (req, res) => {
 	var id = req.params.id;
@@ -105,14 +96,22 @@ app.post('/rechercher', (req, res) => {
 	})
 });
 
-//Route test ajax
+//Modifier les informations d'un membre avec Ajax
 app.post('/modifier_ajax', (req,res) => {
-   req.body._id = ObjectID(req.body._id)
-
-   db.collection('adresse').save(req.body, (err, result) => {
-   if (err) return console.log(err)
-       console.log('sauvegarder dans la BD')
-   res.send(JSON.stringify(req.body));
-   // res.status(204)
+  	req.body._id = ObjectID(req.body._id);
+  	db.collection('adresse').save(req.body, (err, result) => {
+   	if (err) return console.log(err)
+   		console.log('sauvegarder dans la BD');
+   		res.send(JSON.stringify(req.body));
    })
-})
+});
+
+//Ajouter un membre à la BDD avec Ajax
+app.post('/ajouter_ajax', (req, res) => {
+	db.collection('adresse').save(req.body, (err, resultat) => {
+	if (err) return console.log(err);
+	console.log('sauvegarder dans la BD');
+	//res.redirect('/adresse');
+	res.send(JSON.stringify(req.body));
+	});
+});
