@@ -123,6 +123,13 @@
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.send(sData);
 			xhr.addEventListener("readystatechange", traiterRequest, false);
+
+			let node = document.createElement("TR");
+			console.log(node);
+
+			node.innerHTML="<td></td><td contenteditable='true'>"+data['nom']+"</td><td contenteditable='true'>"+data['prenom']+"</td><td contenteditable='true'>"+data['telephone']+"</td><td contenteditable='true'>"+data['courriel']+"</td><td><a class='supprimer' href='#'>Delete</a></td><td><a class='sauver' href='#'>Sauver</a></td>";
+
+			document.getElementsByClassName('tableau')[0].appendChild(node);
 		};
 
 		function traiterRequest(e)

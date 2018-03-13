@@ -102,6 +102,7 @@ app.post('/ajouter_ajax', (req, res) => {
 	db.collection('adresse').save(req.body, (err, resultat) => {
 		if (err) return console.log(err);
 		console.log('sauvegarder dans la BD');
+		return resultat;
 	});
 });
 
