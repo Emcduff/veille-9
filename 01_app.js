@@ -41,16 +41,6 @@ app.get('/adresse', (req, res) => {
 	});
 });
 
-//Supprimer un membre de la BDD
-app.get('/delete/:id', (req, res) => {
-	var id = req.params.id;
-	db.collection('adresse').findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
-		if (err) return console.log(err);
-		res.redirect('/adresse');
-	});
-});
-
-
 //Tri ascendant
 app.get('/trier/:cle/:ordre', (req, res) => {
 	let cle = req.params.cle
@@ -81,6 +71,7 @@ const peupler_bd = (req,res) => {
 app.get('/vider', (req, res) => {
 	db.collection('adresse').drop();
 	res.redirect('/adresse');
+	return;
 });
 
 //Recherche dans la BDD
@@ -103,14 +94,21 @@ app.post('/modifier_ajax', (req,res) => {
    	if (err) return console.log(err)
    		console.log('sauvegarder dans la BD');
    		res.send(JSON.stringify(req.body));
-   })
+  	})
 });
 
 //Ajouter un membre à la BDD avec Ajax
 app.post('/ajouter_ajax', (req, res) => {
 	db.collection('adresse').save(req.body, (err, resultat) => {
-	if (err) return console.log(err);
-	console.log('sauvegarder dans la BD');
-	res.redirect('/adresse');
+		if (err) return console.log(err);
+		console.log('sauvegarder dans la BD');
+	});
+});
+
+//Supprimer un membre de la BDD avec Ajax
+app.get('/supprimer_ajax/:id', (req, res) => {
+	var id = req.params.id;
+	db.collection('adresse').findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
+		if (err) return console.log(err);
 	});
 });

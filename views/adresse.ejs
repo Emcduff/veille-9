@@ -20,10 +20,8 @@
 		{
 			let laLigne = this.parentNode.parentNode
 
-			console.log('modifier_ajax');
-
 			xhr = new XMLHttpRequest();
-			xhr.open('POST', "modifier_ajax", true);
+			xhr.open('POST', "/modifier_ajax", true);
 
 			data =
 			{
@@ -42,7 +40,7 @@
 			let elmForm = document.getElementById('mon_formulaire');
  			let elmInput = elmForm.querySelectorAll('input');
 
- 			elmInput[0].value = sData["id"];
+ 			elmInput[0].value = sData["_id"];
  			elmInput[1].value = sData["nom"];
  			elmInput[2].value = sData["prenom"];
  			elmInput[3].value = sData["telephone"];
@@ -53,7 +51,47 @@
 		{
 			if(xhr.readyState == 4 && xhr.status == 200)
 			{
-				console.log('ajax fonctionne');
+				console.log('modifier_ajax fonctionne');
+				let  maReponse = JSON.parse(xhr.responseText);
+			};
+		};
+	};
+
+//------------------------------------- Supprimer
+
+	let elmSupprimer = document.querySelectorAll('.supprimer')
+	for (elm of elmSupprimer)
+	{
+		elm.addEventListener('click', function()
+		{
+			let laLigne = this.parentNode.parentNode
+
+			xhr = new XMLHttpRequest();
+
+			data =
+			{
+				"_id" : laLigne.children[0].innerHTML, 
+ 				"nom" : laLigne.children[1].innerHTML,
+ 				"prenom" : laLigne.children[2].innerHTML,
+ 				"telephone" : laLigne.children[3].innerHTML,
+ 				"courriel" : laLigne.children[4].innerHTML
+			};
+
+			xhr.open('GET', "/supprimer_ajax/" + data["_id"], true);
+
+			sData = JSON.stringify(data);
+			xhr.setRequestHeader('Content-type', 'application/json');
+			xhr.send(sData);
+			xhr.addEventListener("readystatechange", traiterRequest, false);
+
+			laLigne.remove();
+		});
+
+		function traiterRequest(e)
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				console.log('supprimer_ajax fonctionne');
 				let  maReponse = JSON.parse(xhr.responseText);
 			};
 		};
@@ -64,9 +102,8 @@
 	let elmAjouter = document.querySelectorAll('.ajouter');
 	document.getElementById("btnAjouter").addEventListener('click', function()
 	{
-		console.log('Ajouter_ajax');
 		xhr = new XMLHttpRequest();
-		xhr.open('POST', "modifier_ajax", true);
+		xhr.open('POST', "/ajouter_ajax", true);
 
 		if ((elmAjouter[0].value!="")&&(elmAjouter[1].value!="")&&(elmAjouter[2].value!="")&&(elmAjouter[3].value!=""))
 		{
@@ -86,8 +123,16 @@
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.send(sData);
 			xhr.addEventListener("readystatechange", traiterRequest, false);
-		}
+		};
 
+		function traiterRequest(e)
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				console.log('ajouter_ajax fonctionne');
+				let  maReponse = JSON.parse(xhr.responseText);
+			};
+		};
 	});
 
 </script>
